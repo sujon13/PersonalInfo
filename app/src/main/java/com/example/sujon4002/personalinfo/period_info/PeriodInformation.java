@@ -1,6 +1,7 @@
 package com.example.sujon4002.personalinfo.period_info;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -13,8 +14,15 @@ public class PeriodInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_period_information);
-        showMessage();
+        //showMessage();
+        showEditDialog();
     }
+    private void showEditDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
+        editNameDialogFragment.show(fragmentManager, "fragment_edit_name");
+    }
+
     public void showMessage()
     {
         // Get the Intent that started this activity and extract the string
