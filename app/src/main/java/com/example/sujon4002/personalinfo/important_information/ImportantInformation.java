@@ -28,55 +28,11 @@ import java.util.List;
 import java.util.Set;
 
 public class ImportantInformation extends AppCompatActivity {
-    //SharedPreferences ssidPref;
-    Set<String> localStore = new HashSet<String>();
     ListView lv;
     ArrayAdapter<String> adapter;
     Crud crud = new Crud();
     Dialog d;
-    public void save(Crud crud)
-    {
-        ArrayList<String> list = crud.getNames();
-        if(list!=null)
-        {
-            localStore.addAll(list);
-            SharedPreferences ssidPref = getApplicationContext().getSharedPreferences("ssidPref", Context.MODE_PRIVATE);
-            //SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-            SharedPreferences.Editor EDITIOR = ssidPref.edit();
-            EDITIOR.putStringSet("ssidStored", localStore);
-            EDITIOR.commit();
-        }
-        else {
-            Toast.makeText(ImportantInformation.this, "null during save", Toast.LENGTH_LONG).show();
-        }
-    }
-    public void reStore()
-    {
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("ssidPref", MODE_PRIVATE);
-        localStore = prefs.getStringSet("ssidStored", null);
-        try{
-            if(localStore!=null)
-            {
-                List<String> list = new ArrayList<String>(localStore);
-                adapter=new ArrayAdapter<String>(ImportantInformation.this,android.R.layout.simple_list_item_1,list);
-                crud.setNames(list);
-            }
-            else {
-                Toast.makeText(ImportantInformation.this, "null", Toast.LENGTH_LONG).show();
-            }
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(ImportantInformation.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        lv.setAdapter(adapter);
-    }
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        reStore();
-    }
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,14 +107,14 @@ public class ImportantInformation extends AppCompatActivity {
                 String name=nameEditTxt.getText().toString();
 
                 //VALIDATE
-                if(name.length()>0 && name != null)
+                if(name.length()>0)
                 {
                     //save
                     crud.save(name);
                     nameEditTxt.setText("");
-                    adapter=new ArrayAdapter<String>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
+                    adapter = new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
                     lv.setAdapter(adapter);
-                    save(crud);
+
 
                 }else
                 {
@@ -174,15 +130,15 @@ public class ImportantInformation extends AppCompatActivity {
                 String newName=nameEditTxt.getText().toString();
 
                 //VALIDATE
-                if(newName.length()>0 && newName != null)
+                if(newName.length()>0)
                 {
                     //save
                     if(crud.update(pos,newName))
                     {
                         nameEditTxt.setText(newName);
-                        adapter=new ArrayAdapter<String>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
+                        adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
                         lv.setAdapter(adapter);
-                        save(crud);
+
                     }
 
                 }else
@@ -199,9 +155,9 @@ public class ImportantInformation extends AppCompatActivity {
                 if( crud.delete(pos))
                 {
                     nameEditTxt.setText("");
-                    adapter=new ArrayAdapter<String>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
+                    adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
                     lv.setAdapter(adapter);
-                    save(crud);
+
                 }
             }
         });

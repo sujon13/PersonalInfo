@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonID"
+        android:id="@+id/buttonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
@@ -36,6 +36,6 @@
         android:text="Period"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonID" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonId" />
 
 </android.support.constraint.ConstraintLayout>

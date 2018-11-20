@@ -16,10 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".important_information.ImportantInformation"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTop">
-        </activity>
+        <activity
+            android:name=".important_information.ImportantInformation"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".period_info.PeriodInformation"></activity>
     </application>
 
 </manifest>
