@@ -1,5 +1,6 @@
 package com.example.sujon4002.personalinfo.model;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.example.sujon4002.personalinfo.important_information.ImportantData;
@@ -19,7 +21,6 @@ public class DatabaseQueryClass {
         this.context = context;
         //Logger.addLogAdapter(new AndroidLogAdapter());
     }
-
     public long insertStudent(ImportantData data){
 
         long id = -1;
@@ -41,7 +42,6 @@ public class DatabaseQueryClass {
         } finally {
             sqLiteDatabase.close();
         }
-
         return id;
     }
 
@@ -88,38 +88,39 @@ public class DatabaseQueryClass {
 
         return Collections.emptyList();
     }*/
-    /*
-    public Student getStudentByRegNum(long registrationNum){
+
+    public ImportantData getImportantInformationByName(String Name){
 
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         Cursor cursor = null;
-        Student student = null;
+        ImportantData student = null;
         try {
 
-            cursor = sqLiteDatabase.query(Config.TABLE_STUDENT, null,
-                    Config.COLUMN_STUDENT_REGISTRATION + " = ? ", new String[]{String.valueOf(registrationNum)},
+            cursor = sqLiteDatabase.query(Config.TABLE_IMPORTANT_INFORMATION, null,
+                    Config.COLUMN_NAME + " = ? ", new String[]{Name},
                     null, null, null);
 
 
              // If you want to execute raw query then uncomment below 2 lines. And comment out above sqLiteDatabase.query() method.
 
-             String SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s", Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION, String.valueOf(registrationNum));
-             cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+             //String SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s", Config.TABLE_IMPORTANT_INFORMATION, Config.COLUMN_NAME, String.valueOf(Name));
+             //cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
 
 
             if(cursor.moveToFirst()){
-                int id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_STUDENT_ID));
-                String name = cursor.getString(cursor.getColumnIndex(Config.COLUMN_STUDENT_NAME));
-                long registrationNumber = cursor.getLong(cursor.getColumnIndex(Config.COLUMN_STUDENT_REGISTRATION));
-                String phone = cursor.getString(cursor.getColumnIndex(Config.COLUMN_STUDENT_PHONE));
-                String email = cursor.getString(cursor.getColumnIndex(Config.COLUMN_STUDENT_EMAIL));
+                int id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_ID));
+                String type = cursor.getString(cursor.getColumnIndex(Config.COLUMN_TYPE));
+                String name = cursor.getString(cursor.getColumnIndex(Config.COLUMN_NAME));
+                String relation = cursor.getString(cursor.getColumnIndex(Config.COLUMN_RELATION));
+                String date = cursor.getString(cursor.getColumnIndex(Config.COLUMN_DATE));
+                String description = cursor.getString(cursor.getColumnIndex(Config.COLUMN_DESCRIPTION));
 
-                student = new Student(id, name, registrationNumber, phone, email);
+                student = new ImportantData(id, type, name, relation, date, description);
             }
         } catch (Exception e){
-            Logger.d("Exception: " + e.getMessage());
+            //Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, "Operation failed", Toast.LENGTH_SHORT).show();
         } finally {
             if(cursor!=null)
@@ -129,7 +130,7 @@ public class DatabaseQueryClass {
 
         return student;
     }
-    */
+
     /*public long updateStudentInfo(Student student){
 
         long rowCount = 0;
