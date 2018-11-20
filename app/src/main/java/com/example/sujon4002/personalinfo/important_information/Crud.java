@@ -3,6 +3,8 @@ package com.example.sujon4002.personalinfo.important_information;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.sujon4002.personalinfo.model.ImportantData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -10,10 +12,10 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class Crud {
 
     private ArrayList<String> names = new ArrayList<>();
+    //ImportantData importantData = new ImportantData();
     public void save(String name)
     {
         names.add(name);
-
     }
 
     public ArrayList<String> getNames()
@@ -21,10 +23,7 @@ public class Crud {
 
         return  names;
     }
-    public void setNames(List<String> list)
-    {
-        names = new ArrayList<String>(list);
-    }
+
     public Boolean update(int position,String newName)
     {
         try {

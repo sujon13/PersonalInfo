@@ -82,7 +82,8 @@ public class ImportantInformation extends AppCompatActivity {
         d.setTitle("LISTVIEW CRUD");
         d.setContentView(R.layout.input_dialog);
 
-        final EditText nameEditTxt =  d.findViewById(R.id.nameEditText);
+        final EditText nameEditTxt = d.findViewById(R.id.nameEditText);
+        //final EditText idEditTExt = d.findViewById(R.id.idEditText);
         Button addBtn= d.findViewById(R.id.addBtn);
         Button updateBtn = d.findViewById(R.id.updateBtn);
         Button deleteBtn = d.findViewById(R.id.deleteBtn);
