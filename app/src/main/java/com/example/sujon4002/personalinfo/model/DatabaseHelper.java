@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Config.COLUMN_TYPE + " TEXT NOT NULL, "
                 + Config.COLUMN_NAME + " TEXT NOT NULL, "
                 + Config.COLUMN_RELATION + " TEXT, " //nullable
-                + Config.COLUMN_DATE + " TEXT NOT NULL, "
+                + Config.COLUMN_DATE + " TEXT , "
                 + Config.COLUMN_DESCRIPTION + " TEXT " //nullable
                 + ")";
 

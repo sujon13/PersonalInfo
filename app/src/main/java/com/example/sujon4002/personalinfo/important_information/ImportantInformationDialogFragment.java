@@ -1,4 +1,8 @@
 package com.example.sujon4002.personalinfo.important_information;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -8,18 +12,22 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.sujon4002.personalinfo.R;
+import com.example.sujon4002.personalinfo.important_information.ImportantInformation;
 import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
 
 // ...
 
 public class ImportantInformationDialogFragment extends  DialogFragment {
+
     private  static ImportantDataCreateListener importantDataCreateListener;
     private EditText typeEditText=null;
-    private EditText nameEditText=null;
+    private EditText nameEditText;
     private EditText relationEditText=null;
     private EditText descriptionEditText=null;
     private Button addButton;
@@ -29,6 +37,7 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
     private String relation;
     private  String date;
     private String description;
+
 
     public ImportantInformationDialogFragment() {
         // Empty constructor is required for DialogFragment
@@ -65,10 +74,12 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
             @Override
             public void onClick(View view) {
                 type = typeEditText.getText().toString();
+                if(type.length()==0)type=null;
                 //registrationNumber = Integer.parseInt(registrationEditText.getText().toString());
                 name = nameEditText.getText().toString();
+                if(name.length()==0)name=null;
                 relation = relationEditText.getText().toString();
-                date = null;
+                date = "11 ";
                 description = descriptionEditText.getText().toString();
 
                 ImportantData importantData = new ImportantData(-1, type, name, relation, date, description);
@@ -77,11 +88,22 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
 
                 long id = databaseQueryClass.insertStudent(importantData);
 
-                if(id>0){
+                if(id > 0)
+                {
                     importantData.setId(id);
                     importantDataCreateListener.onImportantDataCreated(importantData);
                     getDialog().dismiss();
                 }
+                else{
+                    showAlertDialog();
+                    typeEditText.setText("");
+                    nameEditText.setText("");
+                    relationEditText.setText("");
+                    descriptionEditText.setText("");
+
+                }
+
+
             }
         });
 
@@ -93,7 +115,19 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
         });
         return view;
     }
-
+    public void showAlertDialog()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("WARNING!!");
+        alertDialog.setMessage("Type or Name must not be null");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -105,4 +139,5 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
+
 }

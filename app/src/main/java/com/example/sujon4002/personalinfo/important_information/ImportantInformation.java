@@ -118,7 +118,8 @@ public class ImportantInformation extends AppCompatActivity implements Important
 
                 }else
                 {
-                    Toast.makeText(ImportantInformation.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ImportantInformation.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class ImportantData implements Serializable {
     private static final long serialVersionUID = -7060210544600464481L;
     private long id;
-    private String type;
-    private  String name;
-    private String relation;
-    private String date;
-    private String description;
+    private String type=null;
+    private  String name=null;
+    private String relation=null;
+    private String date=null;
+    private String description=null;
     public ImportantData(long id, String type, String name, String relation, String date,String description)
     {
         this.id = id;

@@ -40,7 +40,7 @@ public class DatabaseQueryClass {
             id = sqLiteDatabase.insertOrThrow(Config.TABLE_IMPORTANT_INFORMATION, null, contentValues);
         } catch (SQLiteException e){
             //Logger.d("Exception: " + e.getMessage());
-            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Operation failed: " + id, Toast.LENGTH_LONG).show();
         } finally {
             sqLiteDatabase.close();
         }
