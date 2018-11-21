@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.example.sujon4002.personalinfo.important_information.ImportantData;
+import com.example.sujon4002.personalinfo.period_info.PeriodData;
+
 public class DatabaseQueryClass {
 
     private Context context;
@@ -22,6 +24,29 @@ public class DatabaseQueryClass {
         //Logger.addLogAdapter(new AndroidLogAdapter());
     }
     public long insertStudent(ImportantData data){
+
+        long id = -1;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Config.COLUMN_TYPE,data.getType());
+        contentValues.put(Config.COLUMN_NAME, data.getName());
+        contentValues.put(Config.COLUMN_RELATION, data.getRelation());
+        contentValues.put(Config.COLUMN_DATE, data.getDate());
+        contentValues.put(Config.COLUMN_DESCRIPTION, data.getDescription());
+
+        try{
+            id = sqLiteDatabase.insertOrThrow(Config.TABLE_IMPORTANT_INFORMATION, null, contentValues);
+        } catch (SQLiteException e){
+            //Logger.d("Exception: " + e.getMessage());
+            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+        return id;
+    }
+    public long insertStudent(PeriodData data){
 
         long id = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);

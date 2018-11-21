@@ -2,13 +2,12 @@ package com.example.sujon4002.personalinfo.important_information;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ImportantInformation extends AppCompatActivity {
+public class ImportantInformation extends AppCompatActivity implements ImportantDataCreateListener {
     ListView lv;
     ArrayAdapter<String> adapter;
     Crud crud = new Crud();
@@ -37,10 +36,10 @@ public class ImportantInformation extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_important_information);
-
+        showEditDialog();
 
         //showMessage();
-        Toolbar toolbar = findViewById(R.id.toolbar);
+       /* Toolbar toolbar = findViewById(R.id.toolbar);
         try{
             setSupportActionBar(toolbar);
         }
@@ -74,7 +73,7 @@ public class ImportantInformation extends AppCompatActivity {
 
                 displayInputDialog(-1);
             }
-        });
+        });*/
     }
     private void displayInputDialog(final int pos)
     {
@@ -166,7 +165,15 @@ public class ImportantInformation extends AppCompatActivity {
         d.show();
     }
 
+    @Override
+    public void onImportantDataCreated(ImportantData importantData) {
 
+    }
+    private void showEditDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ImportantInformationDialogFragment importantInformationDialogFragment = ImportantInformationDialogFragment.newInstance("Some Title", this);
+        importantInformationDialogFragment.show(fragmentManager, "fragment_edit_information");
+    }
     public void showMessage()
     {
         // Get the Intent that started this activity and extract the string

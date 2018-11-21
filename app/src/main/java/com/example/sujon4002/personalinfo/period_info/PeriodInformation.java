@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
+import com.example.sujon4002.personalinfo.important_information.ImportantData;
 
-public class PeriodInformation extends AppCompatActivity {
+public class PeriodInformation extends AppCompatActivity implements PeriodDataCreateListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +20,14 @@ public class PeriodInformation extends AppCompatActivity {
     }
     private void showEditDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title");
+        EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title", this);
         editNameDialogFragment.show(fragmentManager, "fragment_edit_name");
     }
+    @Override
+    public void onPeriodDataCreated(PeriodData periodData)
+    {
 
+    }
     public void showMessage()
     {
         // Get the Intent that started this activity and extract the string

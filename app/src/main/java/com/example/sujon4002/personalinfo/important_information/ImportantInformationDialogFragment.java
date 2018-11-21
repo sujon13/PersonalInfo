@@ -1,5 +1,4 @@
-package com.example.sujon4002.personalinfo.period_info;
-
+package com.example.sujon4002.personalinfo.important_information;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -12,14 +11,13 @@ import android.widget.EditText;
 
 
 import com.example.sujon4002.personalinfo.R;
-import com.example.sujon4002.personalinfo.important_information.ImportantData;
 import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
-import com.example.sujon4002.personalinfo.period_info.PeriodData;
+
 // ...
 
-public class EditNameDialogFragment extends DialogFragment {
-    private  static PeriodDataCreateListener periodDataCreateListener;
+public class ImportantInformationDialogFragment extends  DialogFragment {
+    private  static ImportantDataCreateListener importantDataCreateListener;
     private EditText typeEditText=null;
     private EditText nameEditText=null;
     private EditText relationEditText=null;
@@ -32,15 +30,15 @@ public class EditNameDialogFragment extends DialogFragment {
     private  String date;
     private String description;
 
-    public EditNameDialogFragment() {
+    public ImportantInformationDialogFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
     }
 
-    public static EditNameDialogFragment newInstance(String title,PeriodDataCreateListener listener) {
-        periodDataCreateListener = listener;
-        EditNameDialogFragment fragment = new EditNameDialogFragment();
+    public static ImportantInformationDialogFragment newInstance(String title, ImportantDataCreateListener listener) {
+        importantDataCreateListener = listener;
+        ImportantInformationDialogFragment fragment = new ImportantInformationDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
         fragment.setArguments(args);
@@ -51,7 +49,7 @@ public class EditNameDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_name, container,false);
+        View view = inflater.inflate(R.layout.fragment_edit_information, container,false);
 
         typeEditText = view.findViewById(R.id.typeId);
         nameEditText = view.findViewById(R.id.nameId);
@@ -73,15 +71,15 @@ public class EditNameDialogFragment extends DialogFragment {
                 date = null;
                 description = descriptionEditText.getText().toString();
 
-                PeriodData periodData = new PeriodData(-1, type, name, relation, date, description);
+                ImportantData importantData = new ImportantData(-1, type, name, relation, date, description);
 
                 DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
 
-                long id = databaseQueryClass.insertStudent(periodData);
+                long id = databaseQueryClass.insertStudent(importantData);
 
                 if(id>0){
-                    periodData.setId(id);
-                    periodDataCreateListener.onPeriodDataCreated(periodData);
+                    importantData.setId(id);
+                    importantDataCreateListener.onImportantDataCreated(importantData);
                     getDialog().dismiss();
                 }
             }

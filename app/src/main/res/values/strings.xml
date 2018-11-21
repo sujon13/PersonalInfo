@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Personal Info</string>
+    <string name="type">Type: ex. birthday/marriage day</string>
+    <string name="name">Enter name</string>
+    <string name="relation">Give relation with you</string>
+    <string name="description">short description</string>
 </resources>
