@@ -1,6 +1,7 @@
 package com.example.sujon4002.personalinfo.important_information.create_important_information;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.sujon4002.personalinfo.R;
@@ -23,13 +25,14 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
     private EditText typeEditText=null;
     private EditText nameEditText;
     private EditText relationEditText=null;
+    private DatePicker datePicker;
     private EditText descriptionEditText=null;
     private Button addButton;
     private Button cancelButton;
     private String type;
     private String name;
     private String relation;
-    private  String date;
+    private String date;
     private String description;
 
 
@@ -57,6 +60,7 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
         typeEditText = view.findViewById(R.id.typeId);
         nameEditText = view.findViewById(R.id.nameId);
         relationEditText = view.findViewById(R.id.relationId);
+        datePicker = view.findViewById(R.id.datePicker1);
         descriptionEditText = view.findViewById(R.id.descriptionId);
         addButton = view.findViewById(R.id.add_Btn);
         cancelButton = view.findViewById(R.id.cancel_Btn);
@@ -73,7 +77,8 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
                 name = nameEditText.getText().toString();
                 if(name.length()==0)name=null;
                 relation = relationEditText.getText().toString();
-                date = "11 ";
+                date = Integer.toString(datePicker.getDayOfMonth())+"-" + Integer.toString(datePicker.getMonth())+
+                      "-" + Integer.toString(datePicker.getYear());
                 description = descriptionEditText.getText().toString();
 
                 ImportantData importantData = new ImportantData(-1, type, name, relation, date, description);
@@ -123,6 +128,17 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
 
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            //noinspection ConstantConditions
+            dialog.getWindow().setLayout(width, height);
+        }
     }
 
 }

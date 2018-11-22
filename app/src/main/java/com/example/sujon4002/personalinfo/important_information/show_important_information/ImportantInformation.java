@@ -25,10 +25,10 @@ import java.util.ArrayList;
 
 
 public class ImportantInformation extends AppCompatActivity implements ImportantDataCreateListener {
-    ListView listView;
-    ArrayList<ImportantData> importantDataArrayList = new ArrayList<>();
+    private ListView listView;
+    private ArrayList<ImportantData> importantDataArrayList = new ArrayList<>();
     Dialog d;
-
+    private ImportantInformationListAdapter listAdapter;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class ImportantInformation extends AppCompatActivity implements Important
         DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(this);
         try{
             importantDataArrayList.addAll(databaseQueryClass.getAllImportantInformation() );
-            ImportantInformationListAdapter listAdapter = new ImportantInformationListAdapter(this,importantDataArrayList);
+            listAdapter = new ImportantInformationListAdapter(this,importantDataArrayList);
             listView.setAdapter(listAdapter);
         }
         catch (Exception e)
@@ -86,100 +86,11 @@ public class ImportantInformation extends AppCompatActivity implements Important
         }
 
     }
-    /*private void displayInputDialog(final int pos)
-    {
-        d = new Dialog(this);
-        d.setTitle("LISTVIEW CRUD");
-        d.setContentView(R.layout.input_dialog);
-
-        final EditText nameEditTxt = d.findViewById(R.id.nameEditText);
-        //final EditText idEditTExt = d.findViewById(R.id.idEditText);
-        Button addBtn= d.findViewById(R.id.addBtn);
-        Button updateBtn = d.findViewById(R.id.updateBtn);
-        Button deleteBtn = d.findViewById(R.id.deleteBtn);
-
-        if(pos == -1)
-        {
-            addBtn.setEnabled(true);
-            updateBtn.setEnabled(false);
-            deleteBtn.setEnabled(false);
-        }else
-        {
-            addBtn.setEnabled(true);
-            updateBtn.setEnabled(true);
-            deleteBtn.setEnabled(true);
-            //nameEditTxt.setText(crud.getNames().get(pos));
-        }
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //GET DATA
-                String name=nameEditTxt.getText().toString();
-
-                //VALIDATE
-                if(name.length()>0)
-                {
-                    //save
-                    //crud.save(name);
-                    nameEditTxt.setText("");
-                    //adapter = new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
-                    listView.setAdapter(adapter);
-
-
-                }else
-                {
-                    //Toast.makeText(getApplicationContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(ImportantInformation.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        updateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //GET DATA
-                String newName=nameEditTxt.getText().toString();
-
-                //VALIDATE
-                if(newName.length()>0)
-                {
-                    //save
-                    //if(crud.update(pos,newName))
-                    {
-                        nameEditTxt.setText(newName);
-                        //adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
-                        listView.setAdapter(adapter);
-
-                    }
-
-                }else
-                {
-                    Toast.makeText(ImportantInformation.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //DELETE
-                //if( crud.delete(pos))
-                {
-                    nameEditTxt.setText("");
-                    //adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
-                    listView.setAdapter(adapter);
-
-                }
-            }
-        });
-
-        d.show();
-    }*/
 
     @Override
     public void onImportantDataCreated(ImportantData importantData) {
-        showList();
+        importantDataArrayList.add(importantData);
+        listAdapter.notifyDataSetChanged();
         Toast.makeText(ImportantInformation.this, importantData.getType()+" "+importantData.getName(), Toast.LENGTH_LONG).show();
     }
     private void showEditDialog() {

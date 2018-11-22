@@ -34,12 +34,14 @@ public class ImportantInformationListAdapter extends ArrayAdapter<ImportantData>
         TextView listType = rowView.findViewById(R.id.listTypeId);
         TextView listName =  rowView.findViewById(R.id.listNameId);
         TextView listRelation =  rowView.findViewById(R.id.listRelationId);
+        TextView listDate = rowView.findViewById(R.id.listdateId);
         TextView listDescription =  rowView.findViewById(R.id.listDescriptionId);
 
         //this code sets the values of the objects to values from the arrays
         listType.setText("Type: "+String.valueOf(importantDataList.getType()));
         listName.setText("Name : "+importantDataList.getName());
         listRelation.setText("Relation: "+importantDataList.getRelation());
+        listDate.setText("Date: "+importantDataList.getDate());
         listDescription.setText("Description: "+importantDataList.getDescription());
         //formatting date
         /*String date=helplist.getDate();
