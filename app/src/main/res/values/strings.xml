@@ -4,4 +4,5 @@
     <string name="name">Enter name</string>
     <string name="relation">Give relation with you</string>
     <string name="description">short description</string>
+    <string name="empty"> not given</string>
 </resources>

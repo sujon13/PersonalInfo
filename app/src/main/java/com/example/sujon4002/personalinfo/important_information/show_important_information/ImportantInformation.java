@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.important_information.create_important_information.*;
+import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
+
 import android.app.Dialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
@@ -19,11 +21,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 
 
 public class ImportantInformation extends AppCompatActivity implements ImportantDataCreateListener {
     ListView listView;
-    ArrayAdapter<String> adapter;
+    ArrayList<ImportantData> importantDataArrayList = new ArrayList<>();
     Dialog d;
 
     @Override
@@ -43,14 +46,14 @@ public class ImportantInformation extends AppCompatActivity implements Important
         }
 
         listView = findViewById(R.id.list_item);
-
+        showList();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(d != null) {
                     if(!d.isShowing())
                     {
-                        displayInputDialog(i);
+                        //displayInputDialog(i);
                     }else
                     {
                         d.dismiss();
@@ -69,7 +72,21 @@ public class ImportantInformation extends AppCompatActivity implements Important
             }
         });
     }
-    private void displayInputDialog(final int pos)
+    private void showList()
+    {
+        DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(this);
+        try{
+            importantDataArrayList.addAll(databaseQueryClass.getAllImportantInformation() );
+            ImportantInformationListAdapter listAdapter = new ImportantInformationListAdapter(this,importantDataArrayList);
+            listView.setAdapter(listAdapter);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(),"Size: ", Toast.LENGTH_LONG).show();
+        }
+
+    }
+    /*private void displayInputDialog(final int pos)
     {
         d = new Dialog(this);
         d.setTitle("LISTVIEW CRUD");
@@ -158,11 +175,12 @@ public class ImportantInformation extends AppCompatActivity implements Important
         });
 
         d.show();
-    }
+    }*/
 
     @Override
     public void onImportantDataCreated(ImportantData importantData) {
-
+        showList();
+        Toast.makeText(ImportantInformation.this, importantData.getType()+" "+importantData.getName(), Toast.LENGTH_LONG).show();
     }
     private void showEditDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
