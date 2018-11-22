@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
-import com.example.sujon4002.personalinfo.important_information.ImportantInformation;
+import com.example.sujon4002.personalinfo.important_information.show_important_information.ImportantInformation;
 import com.example.sujon4002.personalinfo.period_info.PeriodInformation;
 
 public class MainActivity extends AppCompatActivity {

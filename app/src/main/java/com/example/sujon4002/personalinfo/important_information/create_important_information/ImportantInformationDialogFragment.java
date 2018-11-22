@@ -1,7 +1,6 @@
-package com.example.sujon4002.personalinfo.important_information;
+package com.example.sujon4002.personalinfo.important_information.create_important_information;
+
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,15 +11,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.example.sujon4002.personalinfo.R;
-import com.example.sujon4002.personalinfo.important_information.ImportantInformation;
 import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
-
 // ...
 
 public class ImportantInformationDialogFragment extends  DialogFragment {
@@ -94,16 +88,7 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
                     importantDataCreateListener.onImportantDataCreated(importantData);
                     getDialog().dismiss();
                 }
-                else{
-                    showAlertDialog();
-                    typeEditText.setText("");
-                    nameEditText.setText("");
-                    relationEditText.setText("");
-                    descriptionEditText.setText("");
-
-                }
-
-
+                else showAlertDialog();
             }
         });
 

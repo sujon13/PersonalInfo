@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".important_information.ImportantInformation"
+            android:name=".important_information.show_important_information.ImportantInformation"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".period_info.PeriodInformation"></activity>

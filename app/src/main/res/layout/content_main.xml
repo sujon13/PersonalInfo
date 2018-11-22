@@ -9,11 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.sujon4002.personalinfo.important_information.ImportantInformation"
-    tools:showIn="@layout/activity_main">
+    tools:context="com.example.sujon4002.personalinfo.important_information.show_important_information.ImportantInformation"
+    tools:showIn="@layout/activity_important_information">
 
     <ListView
-        android:id="@+id/lv"
+        android:id="@+id/list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

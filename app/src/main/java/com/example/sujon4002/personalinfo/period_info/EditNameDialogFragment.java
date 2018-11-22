@@ -12,10 +12,8 @@ import android.widget.EditText;
 
 
 import com.example.sujon4002.personalinfo.R;
-import com.example.sujon4002.personalinfo.important_information.ImportantData;
 import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
-import com.example.sujon4002.personalinfo.period_info.PeriodData;
 // ...
 
 public class EditNameDialogFragment extends DialogFragment {

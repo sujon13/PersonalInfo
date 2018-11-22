@@ -1,6 +1,5 @@
-package com.example.sujon4002.personalinfo.important_information;
+package com.example.sujon4002.personalinfo.important_information.show_important_information;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +7,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
+import com.example.sujon4002.personalinfo.important_information.create_important_information.*;
 import android.app.Dialog;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,25 +19,20 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 
 public class ImportantInformation extends AppCompatActivity implements ImportantDataCreateListener {
-    ListView lv;
+    ListView listView;
     ArrayAdapter<String> adapter;
-    Crud crud = new Crud();
     Dialog d;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_important_information);
-        showEditDialog();
+        //showEditDialog();
 
-        //showMessage();
-       /* Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         try{
             setSupportActionBar(toolbar);
         }
@@ -49,9 +42,9 @@ public class ImportantInformation extends AppCompatActivity implements Important
             Toast.makeText(ImportantInformation.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        lv = findViewById(R.id.lv);
+        listView = findViewById(R.id.list_item);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(d != null) {
@@ -71,9 +64,10 @@ public class ImportantInformation extends AppCompatActivity implements Important
             @Override
             public void onClick(View view) {
 
-                displayInputDialog(-1);
+                //displayInputDialog(-1);
+                showEditDialog();
             }
-        });*/
+        });
     }
     private void displayInputDialog(final int pos)
     {
@@ -97,7 +91,7 @@ public class ImportantInformation extends AppCompatActivity implements Important
             addBtn.setEnabled(true);
             updateBtn.setEnabled(true);
             deleteBtn.setEnabled(true);
-            nameEditTxt.setText(crud.getNames().get(pos));
+            //nameEditTxt.setText(crud.getNames().get(pos));
         }
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -110,10 +104,10 @@ public class ImportantInformation extends AppCompatActivity implements Important
                 if(name.length()>0)
                 {
                     //save
-                    crud.save(name);
+                    //crud.save(name);
                     nameEditTxt.setText("");
-                    adapter = new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
-                    lv.setAdapter(adapter);
+                    //adapter = new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
+                    listView.setAdapter(adapter);
 
 
                 }else
@@ -134,11 +128,11 @@ public class ImportantInformation extends AppCompatActivity implements Important
                 if(newName.length()>0)
                 {
                     //save
-                    if(crud.update(pos,newName))
+                    //if(crud.update(pos,newName))
                     {
                         nameEditTxt.setText(newName);
-                        adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
-                        lv.setAdapter(adapter);
+                        //adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
+                        listView.setAdapter(adapter);
 
                     }
 
@@ -153,11 +147,11 @@ public class ImportantInformation extends AppCompatActivity implements Important
             public void onClick(View v) {
 
                 //DELETE
-                if( crud.delete(pos))
+                //if( crud.delete(pos))
                 {
                     nameEditTxt.setText("");
-                    adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
-                    lv.setAdapter(adapter);
+                    //adapter=new ArrayAdapter<>(ImportantInformation.this,android.R.layout.simple_list_item_1,crud.getNames());
+                    listView.setAdapter(adapter);
 
                 }
             }

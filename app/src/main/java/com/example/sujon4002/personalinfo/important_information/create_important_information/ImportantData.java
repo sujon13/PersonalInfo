@@ -1,4 +1,4 @@
-package com.example.sujon4002.personalinfo.important_information;
+package com.example.sujon4002.personalinfo.important_information.create_important_information;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ public class ImportantData implements Serializable {
     private String relation=null;
     private String date=null;
     private String description=null;
-    public ImportantData(long id, String type, String name, String relation, String date,String description)
+    public ImportantData(long id, String type, String name, String relation, String date, String description)
     {
         this.id = id;
         this.type = type;

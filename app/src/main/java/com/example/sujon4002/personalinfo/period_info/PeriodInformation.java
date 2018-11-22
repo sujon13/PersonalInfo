@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
-import com.example.sujon4002.personalinfo.important_information.ImportantData;
 
 public class PeriodInformation extends AppCompatActivity implements PeriodDataCreateListener {
 
