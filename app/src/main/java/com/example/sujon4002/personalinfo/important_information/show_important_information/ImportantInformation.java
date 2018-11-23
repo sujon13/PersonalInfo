@@ -50,6 +50,7 @@ public class ImportantInformation extends AppCompatActivity implements Important
         }
         //it should be called after toolbar initializing
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         listView = findViewById(R.id.list_item);
         showList();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
