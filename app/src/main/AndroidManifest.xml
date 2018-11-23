@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".important_information.AlarmReceiver" >
-        </receiver>
+        <receiver android:name=".important_information.AlarmReceiver"></receiver>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +21,9 @@
         <activity
             android:name=".important_information.show_important_information.ImportantInformation"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".period_info.PeriodInformation"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".period_info.PeriodInformation" />
+        <activity android:name=".important_information.show_important_information.DetailImportantInformation"></activity>
     </application>
 
 </manifest>

@@ -49,5 +49,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <Button
+        android:id="@+id/cancelButtonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="34dp"
+        android:onClick="cancelAlarm"
+        android:text="@android:string/cancel"
+        app:layout_constraintStart_toStartOf="@+id/alarmButtonId"
+        app:layout_constraintTop_toBottomOf="@+id/alarmButtonId" />
+
 
 </android.support.constraint.ConstraintLayout>

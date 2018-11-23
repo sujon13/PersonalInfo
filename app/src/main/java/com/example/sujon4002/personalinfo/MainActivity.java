@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.sujon4002.personalinfo.important_information.AlarmReceiver;
 import com.example.sujon4002.personalinfo.important_information.show_important_information.ImportantInformation;
@@ -16,33 +17,53 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private Context context;
+    AlarmManager alarmMgr;
+    PendingIntent alarmIntent;
+    Button alarmButton;
+    Button cancelButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+        alarmManage();
 
     }
-    public void startAlarm(View view)
+    public void alarmManage()
     {
-        AlarmManager alarmMgr;
-        PendingIntent alarmIntent;
+        alarmButton = findViewById(R.id.alarmButtonId);
+        cancelButton = findViewById(R.id.cancelButtonId);
 
         alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-        // Set the alarm to start at 8:30 a.m.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 22);
-        calendar.set(Calendar.MINUTE, 40);
+        alarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                // Set the alarm to start at 8:30 a.m.
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 04);
+                calendar.set(Calendar.MINUTE, 01);
 
-        // setRepeating() lets you specify a precise custom interval--in this case,
-        // 20 minutes.
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                1000 * 60 * 2, alarmIntent);
+                // setRepeating() lets you specify a precise custom interval--in this case,
+                // 20 minutes.
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        1000 * 60 * 1, alarmIntent);
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (alarmMgr!= null) {
+                    alarmMgr.cancel(alarmIntent);
+                }
+            }
+        });
     }
+
     public void goPersonalInfo(View view)
     {
         Intent intent = new Intent(this, ImportantInformation.class);

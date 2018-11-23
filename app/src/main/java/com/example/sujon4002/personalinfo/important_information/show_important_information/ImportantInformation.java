@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.sujon4002.personalinfo.MainActivity;
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.important_information.create_important_information.*;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
@@ -49,16 +50,22 @@ public class ImportantInformation extends AppCompatActivity implements Important
         showList();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(d != null) {
-                    if(!d.isShowing())
-                    {
-                        //displayInputDialog(i);
-                    }else
-                    {
-                        d.dismiss();
-                    }
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(ImportantInformation.this, DetailImportantInformation.class);
+                //Object selectedItem =  parent.getItemAtPosition(position);
+                ImportantData data = importantDataArrayList.get(position);
+
+                intent.putExtra("SERIALIZE_DATA", data);
+                startActivity(intent);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showEditDialog();
+                return false;
             }
         });
 
