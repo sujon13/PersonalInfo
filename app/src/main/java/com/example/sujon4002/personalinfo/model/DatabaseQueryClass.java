@@ -13,6 +13,7 @@ import com.example.sujon4002.personalinfo.period_info.create_period_information.
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class DatabaseQueryClass {
 
@@ -22,7 +23,7 @@ public class DatabaseQueryClass {
         this.context = context;
         //Logger.addLogAdapter(new AndroidLogAdapter());
     }
-    public long insertStudent(ImportantData data){
+    public long insertImportantInformation(ImportantData data){
 
         long id = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
@@ -45,7 +46,7 @@ public class DatabaseQueryClass {
         }
         return id;
     }
-    public long insertStudent(PeriodData data){
+    public long insertPeriodInformation(PeriodData data){
 
         long id = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
@@ -157,33 +158,34 @@ public class DatabaseQueryClass {
         }
 
         return student;
-    }
+    }*/
 
-    /*public long updateStudentInfo(Student student){
+    public long updateImportantInformation(ImportantData data){
 
         long rowCount = 0;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Config.COLUMN_STUDENT_NAME, student.getName());
-        contentValues.put(Config.COLUMN_STUDENT_REGISTRATION, student.getRegistrationNumber());
-        contentValues.put(Config.COLUMN_STUDENT_PHONE, student.getPhoneNumber());
-        contentValues.put(Config.COLUMN_STUDENT_EMAIL, student.getEmail());
+        contentValues.put(Config.COLUMN_TYPE,data.getType());
+        contentValues.put(Config.COLUMN_NAME, data.getName());
+        contentValues.put(Config.COLUMN_RELATION, data.getRelation());
+        contentValues.put(Config.COLUMN_DATE, data.getDate());
+        contentValues.put(Config.COLUMN_DESCRIPTION, data.getDescription());
 
         try {
-            rowCount = sqLiteDatabase.update(Config.TABLE_STUDENT, contentValues,
-                    Config.COLUMN_STUDENT_ID + " = ? ",
-                    new String[] {String.valueOf(student.getId())});
+            rowCount = sqLiteDatabase.update(Config.TABLE_IMPORTANT_INFORMATION, contentValues,
+                    Config.COLUMN_ID + " = ? ",
+                    new String[] {String.valueOf(data.getId())});
         } catch (SQLiteException e){
-            Logger.d("Exception: " + e.getMessage());
+            //Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
             sqLiteDatabase.close();
         }
 
         return rowCount;
-    }*/
+    }
 
     /*public long deleteStudentByRegNum(long registrationNum) {
         long deletedRowCount = -1;

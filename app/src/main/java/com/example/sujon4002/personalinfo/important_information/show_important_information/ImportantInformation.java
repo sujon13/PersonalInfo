@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.example.sujon4002.personalinfo.MainActivity;
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.important_information.create_important_information.*;
+import com.example.sujon4002.personalinfo.important_information.update_important_information.ImportantDataUpdateListener;
+import com.example.sujon4002.personalinfo.important_information.update_important_information.ImportantInfoUpdateDiaFragment;
+import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
 
 import android.app.Dialog;
@@ -37,7 +40,6 @@ public class ImportantInformation extends AppCompatActivity implements Important
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_important_information);
 
-        //showEditDialog();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         try{
@@ -69,7 +71,16 @@ public class ImportantInformation extends AppCompatActivity implements Important
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showEditDialog();
+                //showUpdateDialog();
+                ImportantInfoUpdateDiaFragment importantInfoUpdateDiaFragment = ImportantInfoUpdateDiaFragment.newInstance(position,"Title", new ImportantDataUpdateListener() {
+                    @Override
+                    public void onDataUpdated(ImportantData importantData) {
+                        importantDataArrayList.set((int)importantData.getId(), importantData);
+                        listAdapter.notifyDataSetChanged();
+                    }
+                });
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                importantInfoUpdateDiaFragment.show(fragmentManager, "fragment_update_information");
                 return true;
             }
         });

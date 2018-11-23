@@ -1,4 +1,24 @@
-package com.example.sujon4002.personalinfo.important_information.create_important_information;
+package com.example.sujon4002.personalinfo.important_information.update_important_information;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+
+import com.example.sujon4002.personalinfo.R;
+import com.example.sujon4002.personalinfo.important_information.create_important_information.ImportantData;
+import com.example.sujon4002.personalinfo.important_information.create_important_information.ImportantDataCreateListener;
+import com.example.sujon4002.personalinfo.model.Config;
+import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,16 +39,17 @@ import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
 // ...
 
-public class ImportantInformationDialogFragment extends  DialogFragment {
+public class ImportantInfoUpdateDiaFragment extends DialogFragment {
 
-    private  static ImportantDataCreateListener importantDataCreateListener;
+    private  static ImportantDataUpdateListener importantDataUpdateListener;
     private EditText typeEditText=null;
     private EditText nameEditText;
     private EditText relationEditText=null;
     private DatePicker datePicker;
     private EditText descriptionEditText=null;
-    private Button addButton;
+    private Button updateButton;
     private Button cancelButton;
+    private static int id;
     private String type;
     private String name;
     private String relation;
@@ -36,15 +57,19 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
     private String description;
 
 
-    public ImportantInformationDialogFragment() {
+    public ImportantInfoUpdateDiaFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
     }
 
-    public static ImportantInformationDialogFragment newInstance(String title, ImportantDataCreateListener listener) {
-        importantDataCreateListener = listener;
-        ImportantInformationDialogFragment fragment = new ImportantInformationDialogFragment();
+    public static com.example.sujon4002.personalinfo.important_information.update_important_information.
+            ImportantInfoUpdateDiaFragment newInstance(int _id,String title, ImportantDataUpdateListener listener) {
+        importantDataUpdateListener = listener;
+        id = _id;
+        com.example.sujon4002.personalinfo.important_information.update_important_information.
+                ImportantInfoUpdateDiaFragment fragment = new com.example.sujon4002.personalinfo.important_information.
+                update_important_information.ImportantInfoUpdateDiaFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
         fragment.setArguments(args);
@@ -55,20 +80,20 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_information, container,false);
+        View view = inflater.inflate(R.layout.fragment_update_information, container,false);
 
         typeEditText = view.findViewById(R.id.typeId);
         nameEditText = view.findViewById(R.id.nameId);
         relationEditText = view.findViewById(R.id.relationId);
         datePicker = view.findViewById(R.id.datePicker1);
         descriptionEditText = view.findViewById(R.id.descriptionId);
-        addButton = view.findViewById(R.id.add_Btn);
+        updateButton = view.findViewById(R.id.update_Btn);
         cancelButton = view.findViewById(R.id.cancel_Btn);
 
         String title = getArguments().getString(Config.TITLE, "Enter information");
         getDialog().setTitle(title);
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 type = typeEditText.getText().toString();
@@ -78,19 +103,19 @@ public class ImportantInformationDialogFragment extends  DialogFragment {
                 if(name.length()==0)name=null;
                 relation = relationEditText.getText().toString();
                 date = Integer.toString(datePicker.getDayOfMonth())+"-" + Integer.toString(datePicker.getMonth())+
-                      "-" + Integer.toString(datePicker.getYear());
+                        "-" + Integer.toString(datePicker.getYear());
                 description = descriptionEditText.getText().toString();
 
                 ImportantData importantData = new ImportantData(-1, type, name, relation, date, description);
 
                 DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
 
-                long id = databaseQueryClass.insertImportantInformation(importantData);
+                long affectedRow = databaseQueryClass.updateImportantInformation(importantData);
 
-                if(id > 0)
+                if(affectedRow > 0)
                 {
                     importantData.setId(id);
-                    importantDataCreateListener.onImportantDataCreated(importantData);
+                    importantDataUpdateListener.onDataUpdated(importantData);
                     getDialog().dismiss();
                 }
                 else showAlertDialog();

@@ -76,7 +76,7 @@ public class EditNameDialogFragment extends DialogFragment {
 
                 DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
 
-                long id = databaseQueryClass.insertStudent(periodData);
+                long id = databaseQueryClass.insertPeriodInformation(periodData);
 
                 if(id>0){
                     periodData.setId(id);
