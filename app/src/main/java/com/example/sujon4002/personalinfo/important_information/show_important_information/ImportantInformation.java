@@ -2,8 +2,10 @@ package com.example.sujon4002.personalinfo.important_information.show_important_
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.MainActivity;
@@ -34,6 +36,7 @@ public class ImportantInformation extends AppCompatActivity implements Important
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_important_information);
+
         //showEditDialog();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -45,7 +48,8 @@ public class ImportantInformation extends AppCompatActivity implements Important
             e.printStackTrace();
             Toast.makeText(ImportantInformation.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
+        //it should be called after toolbar initializing
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listView = findViewById(R.id.list_item);
         showList();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,7 +69,7 @@ public class ImportantInformation extends AppCompatActivity implements Important
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 showEditDialog();
-                return false;
+                return true;
             }
         });
 
@@ -93,7 +97,16 @@ public class ImportantInformation extends AppCompatActivity implements Important
         }
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onImportantDataCreated(ImportantData importantData) {
         importantDataArrayList.add(importantData);

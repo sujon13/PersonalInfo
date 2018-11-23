@@ -5,4 +5,8 @@
     <string name="relation">Give relation with you</string>
     <string name="description">short description</string>
     <string name="empty"> not given</string>
+    <string name="main_activity_name">Home</string>
+    <string name="important_information_name">List of Important Info</string>
+    <string name="detail_important_information_name">Detail of Information</string>
+    <string name="period_info_name">Period Info</string>
 </resources>

@@ -1,8 +1,10 @@
 package com.example.sujon4002.personalinfo.important_information.show_important_information;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
@@ -14,7 +16,18 @@ public class DetailImportantInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_important_information);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         showTestData();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     public void showTestData()
     {

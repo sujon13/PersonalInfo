@@ -11,19 +11,28 @@
         android:theme="@style/AppTheme">
         <receiver android:name=".important_information.AlarmReceiver"></receiver>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:label="@string/main_activity_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity
             android:name=".important_information.show_important_information.ImportantInformation"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".period_info.PeriodInformation" />
-        <activity android:name=".important_information.show_important_information.DetailImportantInformation"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/important_information_name"/>
+        <activity android:name=".period_info.PeriodInformation"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/period_info_name"/>
+        <activity android:name=".important_information.show_important_information.DetailImportantInformation"
+            android:label="@string/detail_important_information_name"
+            android:parentActivityName=".important_information.show_important_information.ImportantInformation">
+
+        </activity>
     </application>
 
 </manifest>
