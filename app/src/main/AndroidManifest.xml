@@ -25,14 +25,16 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity"
             android:label="@string/important_information_name"/>
-        <activity android:name=".period_info.PeriodInformation"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/period_info_name"/>
         <activity android:name=".important_information.show_important_information.DetailImportantInformation"
             android:label="@string/detail_important_information_name"
             android:parentActivityName=".important_information.show_important_information.ImportantInformation">
 
         </activity>
+        <activity
+            android:name=".period_info.show_period_information.PeriodInformation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/period_info_name"/>
     </application>
 
 </manifest>

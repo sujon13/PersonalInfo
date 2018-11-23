@@ -21,11 +21,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
+        android:background="@drawable/btn_selector_shape"
         android:onClick="goPersonalInfo"
+        android:padding="@dimen/activity_horizontal_margin"
         android:text="Important Information"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAllCaps="false"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/buttonId2"
@@ -36,29 +40,32 @@
         android:text="Period"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonId" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonId"
+        tools:textAllCaps="false"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/alarmButtonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="117dp"
-        android:layout_marginTop="41dp"
-        android:onClick="startAlarm"
-        android:text="start alarm"
+        android:layout_marginEnd="152dp"
+        android:layout_marginTop="40dp"
+        android:text="Start Alarm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:textAllCaps="false"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/cancelButtonId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="34dp"
-        android:onClick="cancelAlarm"
+        android:layout_marginTop="32dp"
         android:text="@android:string/cancel"
         app:layout_constraintStart_toStartOf="@+id/alarmButtonId"
-        app:layout_constraintTop_toBottomOf="@+id/alarmButtonId" />
+        app:layout_constraintTop_toBottomOf="@+id/alarmButtonId"
+        tools:textAllCaps="false"
+        android:textAllCaps="false"/>
 
 
 </android.support.constraint.ConstraintLayout>

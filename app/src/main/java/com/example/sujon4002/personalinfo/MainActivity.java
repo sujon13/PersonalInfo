@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.sujon4002.personalinfo.important_information.AlarmReceiver;
 import com.example.sujon4002.personalinfo.important_information.show_important_information.ImportantInformation;
-import com.example.sujon4002.personalinfo.period_info.PeriodInformation;
+import com.example.sujon4002.personalinfo.period_info.show_period_information.PeriodInformation;
 
 import java.util.Calendar;
 
@@ -78,7 +79,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PeriodInformation.class);
         String temp="period";
         intent.putExtra("EXTRA_MESSAGE", temp);
-        startActivity(intent);
+        try{
+            startActivity(intent);
+        }catch (Exception e)
+        {
+            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
 

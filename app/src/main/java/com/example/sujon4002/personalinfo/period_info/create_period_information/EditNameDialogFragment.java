@@ -1,5 +1,6 @@
-package com.example.sujon4002.personalinfo.period_info;
+package com.example.sujon4002.personalinfo.period_info.create_period_information;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -10,10 +11,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
+
 // ...
 
 public class EditNameDialogFragment extends DialogFragment {
@@ -36,7 +37,7 @@ public class EditNameDialogFragment extends DialogFragment {
         // Use `newInstance` instead as shown below
     }
 
-    public static EditNameDialogFragment newInstance(String title,PeriodDataCreateListener listener) {
+    public static EditNameDialogFragment newInstance(String title, PeriodDataCreateListener listener) {
         periodDataCreateListener = listener;
         EditNameDialogFragment fragment = new EditNameDialogFragment();
         Bundle args = new Bundle();
@@ -104,5 +105,16 @@ public class EditNameDialogFragment extends DialogFragment {
 
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            //noinspection ConstantConditions
+            dialog.getWindow().setLayout(width, height);
+        }
     }
 }

@@ -8,12 +8,11 @@ import android.database.sqlite.SQLiteException;
 import android.widget.Toast;
 
 import com.example.sujon4002.personalinfo.important_information.create_important_information.ImportantData;
-import com.example.sujon4002.personalinfo.period_info.PeriodData;
+import com.example.sujon4002.personalinfo.period_info.create_period_information.PeriodData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class DatabaseQueryClass {
 
