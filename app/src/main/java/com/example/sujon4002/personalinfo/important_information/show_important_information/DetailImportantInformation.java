@@ -19,7 +19,6 @@ public class DetailImportantInformation extends AppCompatActivity {
     public void showTestData()
     {
         Intent intent = getIntent();
-        //String message = intent.getStringExtra("SERIALIZE_DATA");
         ImportantData data = (ImportantData) intent.getSerializableExtra("SERIALIZE_DATA");
 
         // Capture the layout's TextView and set the string as its text
