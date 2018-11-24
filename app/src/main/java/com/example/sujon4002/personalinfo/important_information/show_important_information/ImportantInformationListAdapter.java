@@ -39,8 +39,23 @@ public class ImportantInformationListAdapter extends ArrayAdapter<ImportantData>
         String day = date[0];
         String month = integerStringHashMap.get(Integer.valueOf(date[1]));
         String year = date[2];
-        String text_for_show = importantDataList.getName()+"'s "+importantDataList.getType()+" on "+
-                day +"th "+month+" "+year;
+        String text_for_show = importantDataList.getName()+"'s "+importantDataList.getType()+" on "+day;
+
+        switch(Integer.valueOf(day)){
+            case 1:
+                text_for_show+="st ";
+                break;
+            case 2:
+                text_for_show+="nd ";
+                break;
+            case 3:
+                text_for_show+="rd ";
+                break;
+            default:
+                text_for_show+="th ";
+
+        }
+        text_for_show+=month+" "+year;
         shortInfo.setText(text_for_show);
 
         return rowView;

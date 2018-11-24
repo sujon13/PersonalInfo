@@ -55,14 +55,44 @@ public class PeriodInformationListAdapter extends ArrayAdapter<PeriodData> {
         String day = startDate[0];
         String month = integerStringHashMap.get(Integer.valueOf(startDate[1]));
         String year = startDate[2];
-        String text_for_show = "Start: "+day+"th "+month+" "+year;
+        String text_for_show = "Start: "+day;
+        switch(Integer.valueOf(day)){
+            case 1:
+                text_for_show+="st ";
+                break;
+            case 2:
+                text_for_show+="nd ";
+                break;
+            case 3:
+                text_for_show+="rd ";
+                break;
+            default:
+                text_for_show+="th ";
+
+        }
+        text_for_show+=month+" "+year;
         startDateTextView.setText(text_for_show);
 
         String[] endDate = periodData.getEndDate().split("-");
-        day = startDate[0];
-        month = integerStringHashMap.get(Integer.valueOf(startDate[1]));
-        year = startDate[2];
-        text_for_show = "End: "+day+"th "+month+" "+year;
+        day = endDate[0];
+        month = integerStringHashMap.get(Integer.valueOf(endDate[1]));
+        year = endDate[2];
+        text_for_show = "End: "+day;
+        switch(Integer.valueOf(day)){
+            case 1:
+                text_for_show+="st ";
+                break;
+            case 2:
+                text_for_show+="nd ";
+                break;
+            case 3:
+                text_for_show+="rd ";
+                break;
+            default:
+                text_for_show+="th ";
+
+        }
+        text_for_show+=month+" "+year;
         endDateTextView.setText(text_for_show);
 
         text_for_show = periodData.getDescription();

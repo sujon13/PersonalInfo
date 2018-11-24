@@ -1,7 +1,9 @@
 package com.example.sujon4002.personalinfo.period_info.create_period_information;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -115,7 +117,9 @@ public class EditNameDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 startDate = startDateTextView.getText().toString();
+                if(startDate=="")startDate=null;
                 endDate = endDateTextView.getText().toString();
+                if(endDate=="")endDate=null;
                 //registrationNumber = Integer.parseInt(registrationEditText.getText().toString());
                 description = descriptionEditText.getText().toString();
 
@@ -130,6 +134,7 @@ public class EditNameDialogFragment extends DialogFragment {
                     periodDataCreateListener.onPeriodDataCreated(periodData);
                     getDialog().dismiss();
                 }
+                else showAlertDialog();
             }
         });
 
@@ -141,7 +146,19 @@ public class EditNameDialogFragment extends DialogFragment {
         });
         return view;
     }
-
+    public void showAlertDialog()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("WARNING!!");
+        alertDialog.setMessage("Date must not be null");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
