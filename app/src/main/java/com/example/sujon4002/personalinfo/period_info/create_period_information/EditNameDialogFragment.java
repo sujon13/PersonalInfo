@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.model.Config;
@@ -19,16 +20,15 @@ import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
 
 public class EditNameDialogFragment extends DialogFragment {
     private  static PeriodDataCreateListener periodDataCreateListener;
-    private EditText typeEditText=null;
-    private EditText nameEditText=null;
-    private EditText relationEditText=null;
+    private Button startButton;
+    private Button endButton;
+    private TextView startDateTextView;
+    private TextView endDateTextView;
     private EditText descriptionEditText=null;
     private Button addButton;
     private Button cancelButton;
-    private String type;
-    private String name;
-    private String relation;
-    private  String date;
+    private String startDate;
+    private String endDate;
     private String description;
 
     public EditNameDialogFragment() {
@@ -50,11 +50,12 @@ public class EditNameDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_name, container,false);
+        View view = inflater.inflate(R.layout.fragment_edit_period_info, container,false);
 
-        typeEditText = view.findViewById(R.id.typeId);
-        nameEditText = view.findViewById(R.id.nameId);
-        relationEditText = view.findViewById(R.id.relationId);
+        startButton = view.findViewById(R.id.start_btn_id);
+        startDateTextView = view.findViewById(R.id.textStartDateId);
+        endButton = view.findViewById(R.id.end_btn_id);
+        endDateTextView = view.findViewById(R.id.textEndDateId);
         descriptionEditText = view.findViewById(R.id.descriptionId);
         addButton = view.findViewById(R.id.add_Btn);
         cancelButton = view.findViewById(R.id.cancel_Btn);
@@ -65,14 +66,12 @@ public class EditNameDialogFragment extends DialogFragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                type = typeEditText.getText().toString();
+                startDate = startDateTextView.getText().toString();
+                endDate = endDateTextView.getText().toString();
                 //registrationNumber = Integer.parseInt(registrationEditText.getText().toString());
-                name = nameEditText.getText().toString();
-                relation = relationEditText.getText().toString();
-                date = null;
                 description = descriptionEditText.getText().toString();
 
-                PeriodData periodData = new PeriodData(-1, type, name, relation, date, description);
+                PeriodData periodData = new PeriodData(-1, startDate, endDate, description);
 
                 DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
 

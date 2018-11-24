@@ -5,18 +5,14 @@ import java.io.Serializable;
 public class PeriodData implements Serializable {
     private static final long serialVersionUID = -7060210544600464481L;
     private long id;
-    private String type;
-    private String name;
-    private String relation;
-    private String date;
+    private String startDate;
+    private String endDate;
     private String description;
 
-    public PeriodData(long id, String type, String name, String relation, String date, String description) {
+    public PeriodData(long id, String startDate, String endDate, String description) {
         this.id = id;
-        this.type = type;
-        this.name = name;
-        this.relation = relation;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.description = description;
     }
 
@@ -32,36 +28,20 @@ public class PeriodData implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getName() {
-        return name;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRelation() {
-        return relation;
-    }
-
-    public void setRelation(String relation) {
-        this.relation = relation;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getDescription() {

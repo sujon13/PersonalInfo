@@ -53,14 +53,12 @@ public class DatabaseQueryClass {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Config.COLUMN_TYPE,data.getType());
-        contentValues.put(Config.COLUMN_NAME, data.getName());
-        contentValues.put(Config.COLUMN_RELATION, data.getRelation());
-        contentValues.put(Config.COLUMN_DATE, data.getDate());
+        contentValues.put(Config.COLUMN_PERIOD_START_DATE,data.getStartDate());
+        contentValues.put(Config.COLUMN_PERIOD_END_DATE, data.getEndDate());
         contentValues.put(Config.COLUMN_DESCRIPTION, data.getDescription());
 
         try{
-            id = sqLiteDatabase.insertOrThrow(Config.TABLE_IMPORTANT_INFORMATION, null, contentValues);
+            id = sqLiteDatabase.insertOrThrow(Config.TABLE_PERIOD_INFORMATION, null, contentValues);
         } catch (SQLiteException e){
             //Logger.d("Exception: " + e.getMessage());
             Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -103,6 +101,51 @@ public class DatabaseQueryClass {
                     //Toast.makeText(context, "is empty: "+importantDataList.size(), Toast.LENGTH_SHORT).show();
 
                     return importantDataList;
+                }
+
+        } catch (Exception e){
+            //Logger.d("Exception: " + e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        } finally {
+            if(cursor!=null)
+                cursor.close();
+
+            sqLiteDatabase.close();
+        }
+
+        return Collections.emptyList();
+    }
+    public List<PeriodData> getAllPeriodInformation(){
+
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        Cursor cursor = null;
+        try {
+
+            cursor = sqLiteDatabase.query(Config.TABLE_PERIOD_INFORMATION, null, null, null, null, null, null, null);
+
+
+            //If you want to execute raw query then uncomment below 2 lines. And comment out above line.
+
+            //String SELECT_QUERY = String.format("SELECT %s, %s, %s, %s, %s FROM %s", Config.COLUMN_STUDENT_ID, Config.COLUMN_STUDENT_NAME, Config.COLUMN_STUDENT_REGISTRATION, Config.COLUMN_STUDENT_EMAIL, Config.COLUMN_STUDENT_PHONE, Config.TABLE_STUDENT);
+            //cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+
+
+            if(cursor!=null)
+                if(cursor.moveToFirst()){
+                    List<PeriodData> periodDataList = new ArrayList<>();
+                    do {
+                        int id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_PERIOD_ID));
+                        String startDate = cursor.getString(cursor.getColumnIndex(Config.COLUMN_PERIOD_START_DATE));
+                        String endDate = cursor.getString(cursor.getColumnIndex(Config.COLUMN_PERIOD_END_DATE));
+                        String description = cursor.getString(cursor.getColumnIndex(Config.COLUMN_PERIOD_DESCRIPTION));
+
+                        periodDataList.add(new PeriodData(id, startDate,endDate, description) );
+                    }   while (cursor.moveToNext());
+                    //Toast.makeText(context, "is empty: "+importantDataList.size(), Toast.LENGTH_SHORT).show();
+
+                    return periodDataList;
                 }
 
         } catch (Exception e){

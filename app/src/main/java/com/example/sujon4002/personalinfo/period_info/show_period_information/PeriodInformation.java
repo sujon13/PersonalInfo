@@ -58,7 +58,7 @@ public class PeriodInformation extends AppCompatActivity implements PeriodDataCr
     private void showEditDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         EditNameDialogFragment editNameDialogFragment = EditNameDialogFragment.newInstance("Some Title", this);
-        editNameDialogFragment.show(fragmentManager, "fragment_edit_name");
+        editNameDialogFragment.show(fragmentManager, "fragment_edit_period_info");
     }
     @Override
     public void onPeriodDataCreated(PeriodData periodData)

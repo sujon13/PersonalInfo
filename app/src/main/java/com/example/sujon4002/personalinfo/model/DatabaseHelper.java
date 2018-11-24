@@ -42,10 +42,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Config.COLUMN_DESCRIPTION + " TEXT " //nullable
                 + ")";
 
+        String CREATE_PERIOD_TABLE = "CREATE TABLE " + Config.TABLE_PERIOD_INFORMATION + "("
+                + Config.COLUMN_PERIOD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + Config.COLUMN_PERIOD_START_DATE + " TEXT NOT NULL, "
+                + Config.COLUMN_PERIOD_END_DATE + " TEXT NOT NULL, "
+                + Config.COLUMN_PERIOD_DESCRIPTION+ " TEXT " //nullable
+                + ")";
         //Logger.d("Table create SQL: " + CREATE_PERSONAL_TABLE);
 
         db.execSQL(CREATE_PERSONAL_TABLE);
-
+        db.execSQL(CREATE_PERIOD_TABLE);
         //Logger.d("DB created!");
     }
 
