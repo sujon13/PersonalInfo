@@ -9,17 +9,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.important_information.show_important_information.ImportantInformation;
+import com.example.sujon4002.personalinfo.important_information.show_important_information.ImportantInformationListAdapter;
+import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
 import com.example.sujon4002.personalinfo.period_info.create_period_information.EditNameDialogFragment;
 import com.example.sujon4002.personalinfo.period_info.create_period_information.PeriodData;
 import com.example.sujon4002.personalinfo.period_info.create_period_information.PeriodDataCreateListener;
 
+import java.util.ArrayList;
+
 public class PeriodInformation extends AppCompatActivity implements PeriodDataCreateListener {
 
+    private ListView listView;
+    private ArrayList<PeriodData> periodDataArrayList = new ArrayList<>();
+    private PeriodInformationListAdapter listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,8 @@ public class PeriodInformation extends AppCompatActivity implements PeriodDataCr
             Toast.makeText(PeriodInformation.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        listView = findViewById(R.id.period_list_item);
+        showList();
         //showMessage();
         final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +54,20 @@ public class PeriodInformation extends AppCompatActivity implements PeriodDataCr
                 showEditDialog();
             }
         });
+    }
+    private void showList()
+    {
+        DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(this);
+        try{
+            periodDataArrayList.addAll(databaseQueryClass.getAllPeriodInformation() );
+            listAdapter = new PeriodInformationListAdapter(this,periodDataArrayList);
+            listView.setAdapter(listAdapter);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(),"Size: ", Toast.LENGTH_LONG).show();
+        }
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -63,7 +87,8 @@ public class PeriodInformation extends AppCompatActivity implements PeriodDataCr
     @Override
     public void onPeriodDataCreated(PeriodData periodData)
     {
-
+        periodDataArrayList.add(periodData);
+        listAdapter.notifyDataSetChanged();
     }
     public void showMessage()
     {

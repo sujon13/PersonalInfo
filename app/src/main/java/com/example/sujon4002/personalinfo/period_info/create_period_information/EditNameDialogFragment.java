@@ -1,5 +1,6 @@
 package com.example.sujon4002.personalinfo.period_info.create_period_information;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.sujon4002.personalinfo.R;
 import com.example.sujon4002.personalinfo.model.Config;
 import com.example.sujon4002.personalinfo.model.DatabaseQueryClass;
+
+import java.util.Calendar;
 
 // ...
 
@@ -30,6 +34,12 @@ public class EditNameDialogFragment extends DialogFragment {
     private String startDate;
     private String endDate;
     private String description;
+
+    int year;
+    int month;
+    int dayOfMonth;
+    Calendar calendar;
+
 
     public EditNameDialogFragment() {
         // Empty constructor is required for DialogFragment
@@ -63,6 +73,44 @@ public class EditNameDialogFragment extends DialogFragment {
         String title = getArguments().getString(Config.TITLE, "Enter information");
         getDialog().setTitle(title);
 
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                startDateTextView.setText(String.valueOf(day)+"-"+String.valueOf(month)+
+                                        "-"+String.valueOf(year));
+                            }
+                        },year, month, dayOfMonth);
+                datePickerDialog.show();
+            }
+        });
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                endDateTextView.setText(String.valueOf(day)+"-"+String.valueOf(month)+
+                                        "-"+String.valueOf(year));
+                            }
+                        },year, month, dayOfMonth);
+                datePickerDialog.show();
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

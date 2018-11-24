@@ -10,30 +10,32 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/start_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/double_margin"
             android:text="Start"
             android:textAllCaps="false"
-            tools:textAllCaps="false"/>
+            tools:textAllCaps="false" />
 
         <TextView
             android:id="@+id/textStartDateId"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="horizontal">
         <Button
             android:id="@+id/end_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/double_margin"
             android:text="End"
             android:textAllCaps="false"
             tools:textAllCaps="false"/>
@@ -41,7 +43,8 @@
         <TextView
             android:id="@+id/textEndDateId"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
 
     </LinearLayout>
     <EditText
